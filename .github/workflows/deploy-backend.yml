@@ -29,8 +29,8 @@ jobs:
           file: ./CNN-AI/Dockerfile
           push: true
           tags: |
-            ${{ secrets.REGISTRY_URL }}/slc-rdt/skin-lesion-backend:latest
-            ${{ secrets.REGISTRY_URL }}/slc-rdt/skin-lesion-backend:${{ github.sha }}
+            ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-backend:latest
+            ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-backend:${{ github.sha }}
 
   deploy:
     runs-on: hostinger
@@ -61,7 +61,7 @@ jobs:
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
         run: |
-          docker pull ${{ secrets.REGISTRY_URL }}/slc-rdt/skin-lesion-backend:latest
+          docker pull ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-backend:latest
           docker compose -f docker-compose.yml stop backend
           docker compose -f docker-compose.yml rm -f backend
           docker compose -f docker-compose.yml up -d backend
