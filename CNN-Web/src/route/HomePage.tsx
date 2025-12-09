@@ -11,7 +11,6 @@ import axios from 'axios'
 import { UploadPic } from '@/component/UploadPic.tsx'
 import { LoadingButton } from '@/component/LoadingButton.tsx'
 import { Button } from '@/components/ui/button.tsx'
-import { Progress } from '@/components/ui/progress.tsx'
 import { ToastAction } from '@/components/ui/toast.tsx'
 import { useToast } from '@/components/ui/use-toast.ts'
 
@@ -48,6 +47,7 @@ export const HomePage = () => {
       .post(
         import.meta.env.VITE_API_URL + `/getresult`,
         dataForm,
+
         // headers: {
         //   'Content-Type': 'multipart/form-data',
         //   'Access-Control-Allow-Origin': '*',
