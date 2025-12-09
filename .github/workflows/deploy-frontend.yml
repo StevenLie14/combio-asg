@@ -30,7 +30,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-frontend:latest
-            ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-frontend:${{ github.sha }}
 
   deploy:
     runs-on: hostinger
