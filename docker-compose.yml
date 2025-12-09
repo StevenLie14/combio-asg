@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  backend:
+    image: ${REGISTRY_URL}/slc-rdt/skin-lesion-backend:latest
+    build:
+      context: ./CNN-AI
+      dockerfile: Dockerfile
+    container_name: skin-lesion-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./CNN-AI/model1_efficientnet_b0.pkl:/app/model1_efficientnet_b0.pkl:ro
+      - ./CNN-AI/model2_shufflenetv2.pkl:/app/model2_shufflenetv2.pkl:ro
+      - ./CNN-AI/model3_mobilenetv3_small.pkl:/app/model3_mobilenetv3_small.pkl:ro
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+
+  frontend:
+    image: ${REGISTRY_URL}/slc-rdt/skin-lesion-frontend:latest
+    build:
+      context: ./CNN-Web
+      dockerfile: Dockerfile
+    container_name: skin-lesion-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+networks:
+  app-network:
+    driver: bridge

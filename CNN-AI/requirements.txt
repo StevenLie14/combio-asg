@@ -1,6 +1,8 @@
-Flask
-Flask-CORS
+flask
+flask-cors
+torch
+torchvision
 Pillow
 numpy
-scikit-learn
-tensorflow
+gunicorn
+requests
