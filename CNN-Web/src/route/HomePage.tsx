@@ -25,6 +25,7 @@ export const HomePage = () => {
     model1: string
     model2: string
     model3: string
+    ensemble: string
   } | null>(null)
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -103,7 +104,7 @@ export const HomePage = () => {
                 className='flex flex-col items-center p-4'>
                 <CardTitle className='p-2 min-h-16 text-center'>Melanoma</CardTitle>
                 <img
-                  src='./src/assets/mel.jpg'
+                  src='assets/mel.jpg'
                   alt='Melanoma'
                   className='aspect-square w-full rounded-md object-fit h-72'
                 />
@@ -118,7 +119,7 @@ export const HomePage = () => {
                 className='flex flex-col items-center p-4'>
                 <CardTitle className='p-2 min-h-16 text-center'>Nevus (Melanocytic Nevi)</CardTitle>
                 <img
-                  src='./src/assets/nv.jpg'
+                  src='assets/nv.jpg'
                   alt='Nevus'
                   className='aspect-square w-full rounded-md object-fit h-72'
                 />
@@ -133,7 +134,7 @@ export const HomePage = () => {
                 className='flex flex-col items-center p-4'>
                 <CardTitle className='p-2 min-h-16 text-center'>Seborrheic Keratosis</CardTitle>
                 <img
-                  src='./src/assets/bkl.png'
+                  src='assets/bkl.png'
                   alt='Seborrheic Keratosis'
                   className='aspect-square w-full rounded-md object-fit h-72'
                 />
@@ -270,6 +271,17 @@ export const HomePage = () => {
                         </div>
                         <span className='font-bold text-lg text-purple-700 dark:text-purple-300'>
                           {results.model3}
+                        </span>
+                      </div>
+                    </Card>
+                    <Card className='p-4 bg-gradient-to-br from-amber-50 to-orange-100 dark:from-amber-950 dark:to-orange-900 border-2 border-amber-300 dark:border-amber-700 shadow-lg'>
+                      <div className='flex justify-between items-center'>
+                        <div>
+                          <p className='text-xs text-muted-foreground font-semibold'>🏆 Ensemble Result</p>
+                          <span className='font-bold text-sm'>Majority Voting</span>
+                        </div>
+                        <span className='font-bold text-xl text-amber-700 dark:text-amber-300'>
+                          {results.ensemble}
                         </span>
                       </div>
                     </Card>

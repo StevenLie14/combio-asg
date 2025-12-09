@@ -57,6 +57,10 @@ def members():
             result3 = model3(pro_file)
             pred3 = torch.argmax(result3, dim=1).item()
         
+        # Ensemble prediction (majority voting)
+        predictions = [pred1, pred2, pred3]
+        ensemble_pred = max(set(predictions), key=predictions.count)
+        
         label = {
             "melanoma": "Melanoma",
             "nevus": "Nevus",
@@ -66,7 +70,8 @@ def members():
         return jsonify({
             "model1": label.get(classes[pred1], "Unknown"),
             "model2": label.get(classes[pred2], "Unknown"),
-            "model3": label.get(classes[pred3], "Unknown")
+            "model3": label.get(classes[pred3], "Unknown"),
+            "ensemble": label.get(classes[ensemble_pred], "Unknown")
         }), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

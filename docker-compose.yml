@@ -17,8 +17,6 @@ services:
       - ./CNN-AI/model1_efficientnet_b0.pkl:/app/model1_efficientnet_b0.pkl:ro
       - ./CNN-AI/model2_shufflenetv2.pkl:/app/model2_shufflenetv2.pkl:ro
       - ./CNN-AI/model3_mobilenetv3_small.pkl:/app/model3_mobilenetv3_small.pkl:ro
-    networks:
-      - app-network
     healthcheck:
       test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000/health', timeout=5)"]
       interval: 30s
@@ -46,8 +44,6 @@ services:
     depends_on:
       backend:
         condition: service_healthy
-    networks:
-      - app-network
     environment:
       - VITE_API_URL=${VITE_API_URL}
     healthcheck:
@@ -64,7 +60,3 @@ services:
         reservations:
           cpus: '0.25'
           memory: 256M
-
-networks:
-  app-network:
-    driver: bridge

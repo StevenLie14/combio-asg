@@ -22,6 +22,17 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
+      - name: Import Deploy Secrets from Hashicorp
+        uses: hashicorp/vault-action@v2
+        with:
+          method: 'userpass'
+          url: ${{ secrets.VAULT_URL }}
+          username: ${{ secrets.VAULT_USERNAME }}
+          password: ${{ secrets.VAULT_PASSWORD}}
+          tlsSkipVerify: true
+          secrets: |
+            ${{ secrets.VAULT_PATH }} *
+
       - name: Docker Build And Push Frontend
         uses: docker/build-push-action@v6
         with:
@@ -30,6 +41,8 @@ jobs:
           push: true
           tags: |
             ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-frontend:latest
+          build-args: |
+            VITE_API_URL=${{ env.VITE_API_URL }}
 
   deploy:
     runs-on: hostinger
