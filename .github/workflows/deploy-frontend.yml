@@ -61,7 +61,7 @@ jobs:
         env:
           REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
         run: |
-          docker pull ${{ secrets.REGISTRY_URL }}stevenlie14/skin-lesion-frontend:latest
+          docker pull ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-frontend:latest
           docker compose -f docker-compose.yml stop frontend
           docker compose -f docker-compose.yml rm -f frontend
           docker compose -f docker-compose.yml up -d frontend
