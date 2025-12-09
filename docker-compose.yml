@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: ${REGISTRY_URL}/slc-rdt/skin-lesion-backend:latest
+    image: ${REGISTRY_URL}/stevenlie14/skin-lesion-backend:latest
     build:
       context: ./CNN-AI
       dockerfile: Dockerfile
@@ -11,8 +11,8 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - FLASK_ENV=production
-      - PYTHONUNBUFFERED=1
+      - FLASK_ENV=${FLASK_ENV}
+      - PYTHONUNBUFFERED=${PYTHONUNBUFFERED}
     volumes:
       - ./CNN-AI/model1_efficientnet_b0.pkl:/app/model1_efficientnet_b0.pkl:ro
       - ./CNN-AI/model2_shufflenetv2.pkl:/app/model2_shufflenetv2.pkl:ro
@@ -35,7 +35,7 @@ services:
           memory: 2G
 
   frontend:
-    image: ${REGISTRY_URL}/slc-rdt/skin-lesion-frontend:latest
+    image: ${REGISTRY_URL}/stevenlie14/skin-lesion-frontend:latest
     build:
       context: ./CNN-Web
       dockerfile: Dockerfile
@@ -48,6 +48,8 @@ services:
         condition: service_healthy
     networks:
       - app-network
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s

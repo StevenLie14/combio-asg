@@ -46,7 +46,7 @@ export const HomePage = () => {
     setLoading(true)
     axios
       .post(
-        `/api/getresult`,
+        import.meta.env.VITE_API_URL + `/getresult`,
         dataForm,
         // headers: {
         //   'Content-Type': 'multipart/form-data',

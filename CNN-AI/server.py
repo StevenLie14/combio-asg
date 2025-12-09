@@ -32,11 +32,11 @@ model3.load_state_dict(torch.load('model3_mobilenetv3_small.pkl', map_location=d
 model3.to(device)
 model3.eval()
 
-@app.route('/health', methods=['GET'])
+@app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({'status': 'healthy'}), 200
 
-@app.route('/getresult', methods=['POST'])
+@app.route('/api/getresult', methods=['POST'])
 @cross_origin()
 def members():
     if 'files' not in request.files:
