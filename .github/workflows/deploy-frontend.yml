@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: docker-apps
+    runs-on: hostinger
     steps:
       - name: Git Checkout Repository
         uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
             ${{ secrets.REGISTRY_URL }}/slc-rdt/skin-lesion-frontend:${{ github.sha }}
 
   deploy:
-    runs-on: docker-apps
+    runs-on: hostinger
     needs: build
     steps:
       - name: Git Checkout Repository
