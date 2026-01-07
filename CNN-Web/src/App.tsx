@@ -10,7 +10,6 @@ function App() {
       defaultTheme='dark'
       storageKey='vite-ui-theme'>
       <Router>
-        {/*<AuthProvider>*/}
         <Navbar />
         <Routes>
           <Route
@@ -19,7 +18,6 @@ function App() {
           />
         </Routes>
         <Toaster />
-        {/*</AuthProvider>*/}
       </Router>
     </ThemeProvider>
   )

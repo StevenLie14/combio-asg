@@ -16,7 +16,6 @@ export const UploadPic = ({setFile}: IProps) => {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0]
       
-      // Check file type
       if (
         !file.name.endsWith('.jpg') &&
         !file.name.endsWith('.png') &&
@@ -55,7 +54,6 @@ export const UploadPic = ({setFile}: IProps) => {
     if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
       const file = event.dataTransfer.files[0]
       
-      // Check file type
       if (
         !file.name.endsWith('.jpg') &&
         !file.name.endsWith('.png') &&
@@ -70,7 +68,6 @@ export const UploadPic = ({setFile}: IProps) => {
         return
       }
       
-      // Check file size
       if (file.size > 10 * 1024 * 1024) {
         toast({
           variant: 'destructive',

@@ -57,7 +57,6 @@ def members():
             result3 = model3(pro_file)
             pred3 = torch.argmax(result3, dim=1).item()
         
-        # Ensemble prediction (majority voting)
         predictions = [pred1, pred2, pred3]
         ensemble_pred = max(set(predictions), key=predictions.count)
         

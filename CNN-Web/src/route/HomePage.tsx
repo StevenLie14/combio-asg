@@ -15,10 +15,6 @@ import { ToastAction } from '@/components/ui/toast.tsx'
 import { useToast } from '@/components/ui/use-toast.ts'
 
 export const HomePage = () => {
-  // const videoRef = useRef<HTMLVideoElement>(null)
-  // const photoRef = useRef(null)
-
-  // const [data, setData] = useState()
   const { toast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const [results, setResults] = useState<{
@@ -49,12 +45,6 @@ export const HomePage = () => {
         import.meta.env.VITE_API_URL + `/getresult`,
         dataForm,
 
-        // headers: {
-        //   'Content-Type': 'multipart/form-data',
-        //   'Access-Control-Allow-Origin': '*',
-        // },
-        // body: dataForm,
-        // method: 'POST',
       )
       .then((res) => {
         setLoading(false)
@@ -77,15 +67,6 @@ export const HomePage = () => {
 
   return (
     <div className='p-5'>
-      {/* <div className="camera">
-                <video ref= {videoRef}></video>
-                <button onClick={takePhoto}>SNAP!</button>
-              </div>
-              <div className={'result ' + (hasPhoto ? ' hasPhoto' : '')}>
-                <canvas ref = {photoRef}></canvas>
-                <button onClick={closePhoto}>CLOSE!!!</button>
-              </div>
-            */}
 
       <div>
         <Card
@@ -300,13 +281,7 @@ export const HomePage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className='space-y-4'>
-            {/* <div>
-              <div className='flex justify-between mb-2'>
-                <span className='text-sm font-medium'>Ensemble Accuracy</span>
-                <span className='text-sm font-bold'>57.33%</span>
-              </div>
-              <Progress value={57.33} aria-label='57.33% accuracy' />
-            </div> */}
+
             
             <div className='space-y-2'>
               <h4 className='font-semibold text-sm'>Models Used:</h4>
@@ -363,48 +338,3 @@ export const HomePage = () => {
     </div>
   )
 }
-
-// const getVideo = () => {
-//   navigator.mediaDevices
-//       .getUserMedia({video: {width: 1920, height: 1080}})
-//       .then((stream) => {
-//         const video = videoRef.current
-//         if (video) {
-//           video.srcObject = stream
-//           // video.play()
-//           //   .then(() => {
-//           //     // Video is playing
-//           //   })
-//           //   .catch(err => {
-//           //     console.error("Error playing video:", err);
-//           //   });
-//         }
-//       })
-//       .catch((err) => {
-//         console.error('Error accessing media devices:', err)
-//       })
-// }
-//
-// useEffect(() => {
-//   // getVideo();
-// }, [videoRef])
-//
-// const takePhoto = () => {
-//   const width = 414
-//   const height = width / (16 / 9)
-//   const video = videoRef.current
-//   const photo = photoRef.current
-//   photo.width = width
-//   photo.height = height
-//
-//   const ctx = photo.getContext('2d')
-//   ctx.drawImage(video, 0, 0, width, height)
-//   setHasPhoto(true)
-// }
-//
-// const closePhoto = () => {
-//   const photo = photoRef.current
-//   const ctx = photo.getContext('2d')
-//   ctx.clearRect(0, 0, photo.width, photo.height)
-//   setHasPhoto(false)
-// }
