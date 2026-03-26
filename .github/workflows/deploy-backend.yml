@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: hostinger
+    runs-on: shin
     steps:
       - name: Git Checkout Repository
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
             ${{ secrets.REGISTRY_URL }}/stevenlie14/skin-lesion-backend:latest
 
   deploy:
-    runs-on: hostinger
+    runs-on: shin
     needs: build
     steps:
       - name: Git Checkout Repository

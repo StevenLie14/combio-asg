@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: hostinger
+    runs-on: shin
     steps:
       - name: Git Checkout Repository
         uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
             VITE_API_URL=${{ env.VITE_API_URL }}
 
   deploy:
-    runs-on: hostinger
+    runs-on: shin
     needs: build
     steps:
       - name: Git Checkout Repository
